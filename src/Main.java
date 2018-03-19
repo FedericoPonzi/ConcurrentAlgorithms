@@ -1,13 +1,14 @@
-import me.fponzi.mutex.BakeryAlgorithm;
+import me.fponzi.mutex.AravindAlgorithm;
 import me.fponzi.mutex.MutexInterface;
 
 public class Main {
     volatile static int test_value = 0;
+    public static final int NTHREADS = 100;
 
-    public static class PrintThread implements Runnable{
+    public static class SumThread implements Runnable{
         private MutexInterface mutex;
 
-        PrintThread(MutexInterface m)
+        SumThread(MutexInterface m)
         {
             this.mutex = m;
         }
@@ -26,15 +27,15 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        final int NTHREADS = 100;
-
-        MutexInterface p = new BakeryAlgorithm(NTHREADS);
 
         Thread[] threads = new Thread[NTHREADS];
+        
         while (true) {
+            MutexInterface p = new AravindAlgorithm(NTHREADS);
             test_value = 0;
+
             for (int i = 0; i < NTHREADS; i++) {
-                threads[i] = new Thread(new PrintThread(p), "" + i);
+                threads[i] = new Thread(new SumThread(p), "" + i);
             }
 
             for (Thread t : threads) {
