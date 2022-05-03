@@ -25,7 +25,7 @@ public class AravindAlgorithm implements MutexInterface
         resetDate();
     }
     
-    @Override
+    
     public void lock(int i)
     {
         this.flag[i] = true;
@@ -60,7 +60,7 @@ public class AravindAlgorithm implements MutexInterface
         return false;
     }
     
-    @Override
+    
     public void unlock(int i)
     {
         this.date[i] = Arrays.stream(this.date).reduce(Integer::max).getAsInt() + 1;
