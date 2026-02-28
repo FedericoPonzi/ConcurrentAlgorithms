@@ -1,6 +1,5 @@
 /*******************************************************************************
- * Federico Ponzi <federico.ponzi92@gmail.com>
- * @federico_ponzi
+ * Federico Ponzi <me@fponzi.me>
  * https://fponzi.me
  * Copyright (c) 2018
  ******************************************************************************/
