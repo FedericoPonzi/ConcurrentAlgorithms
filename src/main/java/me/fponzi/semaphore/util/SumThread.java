@@ -15,26 +15,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * A simple thread which adds `times` times 1 to the IntegerWrapper value.
  */
-public class SumThread implements Runnable{
+public class SumThread implements Runnable {
     public static final int times = 5;
     private final SemaphoreInterface semaphore;
     private volatile AtomicInteger p;
     private volatile IntegerWrapper wrapper;
 
-    public SumThread(SemaphoreInterface semaphore, IntegerWrapper test_value)
-    {
+    public SumThread(SemaphoreInterface semaphore, IntegerWrapper test_value) {
         this.wrapper = test_value;
         this.semaphore = semaphore;
     }
+
     @Override
-    public void run()
-    {
+    public void run() {
         this.semaphore.acquire();
-        for(int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             System.out.println(Thread.currentThread().getName());
         }
-        
+
         this.semaphore.release();
     }
 }

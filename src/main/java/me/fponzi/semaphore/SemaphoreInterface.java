@@ -7,8 +7,8 @@
 
 package me.fponzi.semaphore;
 
-public interface SemaphoreInterface
-{
+public interface SemaphoreInterface {
     void release();
+
     void acquire();
 }

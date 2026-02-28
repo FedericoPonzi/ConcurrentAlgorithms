@@ -10,17 +10,19 @@ package me.fponzi.util;
 /**
  * Used to share the same object to multiple threads.
  */
-public class IntegerWrapper{
+public class IntegerWrapper {
     public int val = 0;
-    public IntegerWrapper(){}
-    public IntegerWrapper(int test_value){
+
+    public IntegerWrapper() {
+    }
+
+    public IntegerWrapper(int test_value) {
         this.val = 0;
     }
-    
+
     @Override
-    public String toString()
-    {
-        
+    public String toString() {
+
         return val + "";
     }
 }

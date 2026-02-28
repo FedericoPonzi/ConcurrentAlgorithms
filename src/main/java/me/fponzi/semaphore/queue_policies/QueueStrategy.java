@@ -7,9 +7,10 @@
 
 package me.fponzi.semaphore.queue_policies;
 
-public interface QueueStrategy
-{
+public interface QueueStrategy {
     void add(Thread t);
+
     Thread remove();
+
     int size();
 }

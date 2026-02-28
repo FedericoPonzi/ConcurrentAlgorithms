@@ -12,66 +12,55 @@ import me.fponzi.util.IntegerWrapper;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestMutex
-{
-    private final int[] numberOfProcesses = { 2, 5, 50, 100};
-    
+public class TestMutex {
+    private final int[] numberOfProcesses = {2, 5, 50, 100};
+
     /**
      * Reused method to test a lock.
+     *
      * @param number_of_threads
      * @param p
      * @return
      */
-    private int testLock(int number_of_threads, MutexInterface p)
-    {
+    private int testLock(int number_of_threads, MutexInterface p) {
         Thread[] threads = new Thread[number_of_threads];
         IntegerWrapper w = new IntegerWrapper();
-        
-        for (int i = 0; i < number_of_threads; i++)
-        {
+
+        for (int i = 0; i < number_of_threads; i++) {
             threads[i] = new Thread(new SumThread(p, w), "" + i);
         }
-        
-        for (Thread t : threads)
-        {
+
+        for (Thread t : threads) {
             t.start();
         }
-        for (Thread t : threads)
-        {
-            try
-            {
+        for (Thread t : threads) {
+            try {
                 t.join();
-            }catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         return w.val;
     }
-    
+
     @Test
-    public void testAravind()
-    {
-        for(int t : numberOfProcesses)
-        {
-            Assert.assertEquals(testLock(t, new AravindAlgorithm(t)), t*SumThread.times);
+    public void testAravind() {
+        for (int t : numberOfProcesses) {
+            Assert.assertEquals(testLock(t, new AravindAlgorithm(t)), t * SumThread.times);
         }
     }
-    
+
     @Test
-    public void testPetersonLockUnlock()
-    {
-        for(int t : numberOfProcesses)
-        {
-            Assert.assertEquals(testLock(t, new PetersonLockUnlock(t)), t*SumThread.times);
+    public void testPetersonLockUnlock() {
+        for (int t : numberOfProcesses) {
+            Assert.assertEquals(testLock(t, new PetersonLockUnlock(t)), t * SumThread.times);
         }
     }
-    
+
     @Test
-    public void testBakeryAlgorithm()
-    {
-        for(int t : numberOfProcesses)
-        {
-            Assert.assertEquals(testLock(t, new BakeryAlgorithm(t)), t*SumThread.times);
+    public void testBakeryAlgorithm() {
+        for (int t : numberOfProcesses) {
+            Assert.assertEquals(testLock(t, new BakeryAlgorithm(t)), t * SumThread.times);
         }
     }
 }

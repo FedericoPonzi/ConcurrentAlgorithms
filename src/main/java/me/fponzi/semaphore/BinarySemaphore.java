@@ -6,9 +6,9 @@
  ******************************************************************************/
 
 package me.fponzi.semaphore;
-public class BinarySemaphore extends CountingSemaphore
-{
-    public BinarySemaphore(){
+
+public class BinarySemaphore extends CountingSemaphore {
+    public BinarySemaphore() {
         super(2);
     }
 }
