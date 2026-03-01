@@ -17,15 +17,15 @@ public class TestMutex {
     /**
      * Reused method to test a lock.
      *
-     * @param number_of_threads
+     * @param numberOfThreads
      * @param p
      * @return
      */
-    private int testLock(int number_of_threads, MutexInterface p) {
-        Thread[] threads = new Thread[number_of_threads];
+    private int testLock(int numberOfThreads, MutexInterface p) {
+        Thread[] threads = new Thread[numberOfThreads];
         IntegerWrapper w = new IntegerWrapper();
 
-        for (int i = 0; i < number_of_threads; i++) {
+        for (int i = 0; i < numberOfThreads; i++) {
             threads[i] = new Thread(new SumThread(p, w), "" + i);
         }
 

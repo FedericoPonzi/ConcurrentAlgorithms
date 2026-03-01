@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class BakeryAlgorithm implements MutexInterface {
     volatile private boolean[] flag;
     volatile private int[] my_turn;
-    private int numberOfProcesses;
+    private final int numberOfProcesses;
 
     public BakeryAlgorithm(int numberOfProcesses) {
         this.numberOfProcesses = numberOfProcesses;
@@ -29,6 +29,9 @@ public class BakeryAlgorithm implements MutexInterface {
     public void lock(int i) {
         this.flag[i] = true;
         // The problem with bakery algorithm, is this instruction.
+        // operation is not atomic. While Thread A is halfway through
+        // scanning the array to find the max, Thread B could finish its scan,
+        // pick a number, and write it. Thread A might then finish with an outdated "max" value.
         my_turn[i] = Arrays.stream(this.my_turn).reduce(Integer::max).getAsInt() + 1;
         // Since my_turn is not synchronized, we can read whatever value from array.
         // Aravind's solution fixes this by finding the max in a concurrency-free context (in the unlock).
@@ -36,7 +39,7 @@ public class BakeryAlgorithm implements MutexInterface {
 
         for (int j = 0; j < numberOfProcesses; j++) {
             if (j == i) continue;
-            while (flag[j]) ;
+            while (flag[j]);
             while ((my_turn[j] != -1) && (my_turn[i] > my_turn[j] || (my_turn[i] == my_turn[j] && i > j))) ;
         }
     }

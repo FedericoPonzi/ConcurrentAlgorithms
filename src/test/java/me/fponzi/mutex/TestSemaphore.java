@@ -14,11 +14,11 @@ import org.junit.Test;
 public class TestSemaphore {
     private final int[] numberOfProcesses = {2, 5, 50, 100};
 
-    private int testLock(int number_of_threads, MutexInterface p) {
-        Thread[] threads = new Thread[number_of_threads];
+    private int testLock(int numberOfThreads, MutexInterface p) {
+        Thread[] threads = new Thread[numberOfThreads];
         IntegerWrapper w = new IntegerWrapper();
 
-        for (int i = 0; i < number_of_threads; i++) {
+        for (int i = 0; i < numberOfThreads; i++) {
             threads[i] = new Thread(new SumThread(p, w), "" + i);
         }
 

@@ -9,19 +9,16 @@ package me.fponzi.mutex.util;
 import me.fponzi.mutex.MutexInterface;
 import me.fponzi.util.IntegerWrapper;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * A simple thread which adds `times` times 1 to the IntegerWrapper value.
  */
 public class SumThread implements Runnable {
     public static final int times = 5;
-    private volatile AtomicInteger p;
-    private MutexInterface mutex;
+    private final MutexInterface mutex;
     private volatile IntegerWrapper wrapper;
 
-    public SumThread(MutexInterface m, IntegerWrapper test_value) {
-        this.wrapper = test_value;
+    public SumThread(MutexInterface m, IntegerWrapper testValue) {
+        this.wrapper = testValue;
         this.mutex = m;
     }
 
