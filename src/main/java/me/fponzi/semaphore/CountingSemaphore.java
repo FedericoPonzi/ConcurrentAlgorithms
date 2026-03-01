@@ -61,9 +61,8 @@ public class CountingSemaphore implements SemaphoreInterface {
         resources += 1;
         if (resources <= 0) {
             System.out.println("Queue size: " + queue.size());
-            Thread t = queue.remove();
-
-            t.notify();
+            queue.remove();
+            notify();
         }
     }
 }
